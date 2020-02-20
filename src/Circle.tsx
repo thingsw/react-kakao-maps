@@ -3,18 +3,18 @@ import * as React from "react";
 import { MapContext } from "./Map";
 
 export interface CircleProps {
-  options: daum.maps.CircleOptions;
+  options: kakao.maps.CircleOptions;
 }
 
 export class Circle extends React.PureComponent<CircleProps> {
   public static contextType = MapContext;
   public context!: React.ContextType<typeof MapContext>;
 
-  private readonly circle: daum.maps.Circle;
+  private readonly circle: kakao.maps.Circle;
 
   constructor(props: CircleProps) {
     super(props);
-    this.circle = new daum.maps.Circle(this.props.options);
+    this.circle = new kakao.maps.Circle(this.props.options);
   }
 
   public componentDidMount() {

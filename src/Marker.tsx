@@ -3,8 +3,8 @@ import * as React from "react";
 import { MapContext } from "./Map";
 
 export interface MarkerProps {
-  markerClusterer?: daum.maps.MarkerClusterer;
-  options: daum.maps.MarkerOptions;
+  markerClusterer?: kakao.maps.MarkerClusterer;
+  options: kakao.maps.MarkerOptions;
   onClick?(): void;
   onMouseOver?(): void;
   onMouseOut?(): void;
@@ -14,14 +14,14 @@ export class Marker extends React.PureComponent<MarkerProps> {
   public static contextType = MapContext;
   public context!: React.ContextType<typeof MapContext>;
 
-  public readonly marker: daum.maps.Marker;
+  public readonly marker: kakao.maps.Marker;
 
   constructor(props: MarkerProps) {
     super(props);
     this._onClick = this._onClick.bind(this);
     this._onMouseOut = this._onMouseOut.bind(this);
     this._onMouseOver = this._onMouseOver.bind(this);
-    this.marker = new daum.maps.Marker(this.props.options);
+    this.marker = new kakao.maps.Marker(this.props.options);
   }
 
   public componentDidMount() {
@@ -34,13 +34,13 @@ export class Marker extends React.PureComponent<MarkerProps> {
       this.marker.setMap(map);
     }
 
-    daum.maps.event.addListener(this.marker, MarkerEvent.click, this._onClick);
-    daum.maps.event.addListener(
+    kakao.maps.event.addListener(this.marker, MarkerEvent.click, this._onClick);
+    kakao.maps.event.addListener(
       this.marker,
       MarkerEvent.mouseover,
       this._onMouseOver
     );
-    daum.maps.event.addListener(
+    kakao.maps.event.addListener(
       this.marker,
       MarkerEvent.mouseout,
       this._onMouseOut
@@ -91,17 +91,17 @@ export class Marker extends React.PureComponent<MarkerProps> {
       markerClusterer.removeMarker(this.marker);
     }
 
-    daum.maps.event.removeListener(
+    kakao.maps.event.removeListener(
       this.marker,
       MarkerEvent.click,
       this._onClick
     );
-    daum.maps.event.removeListener(
+    kakao.maps.event.removeListener(
       this.marker,
       MarkerEvent.mouseover,
       this._onMouseOver
     );
-    daum.maps.event.removeListener(
+    kakao.maps.event.removeListener(
       this.marker,
       MarkerEvent.mouseout,
       this._onMouseOut

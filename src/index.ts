@@ -1,3 +1,5 @@
+/// <reference path="../kakao.d.ts" />
+
 export { Circle, CircleProps } from "./Circle";
 export { CustomOverlay, CustomOverlayProps } from "./CustomOverlay";
 export { Map, MapProps } from "./Map";

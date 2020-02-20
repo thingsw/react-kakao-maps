@@ -2,24 +2,24 @@ import * as React from "react";
 
 import { MapContext } from "./Map";
 
-export const MarkerClustererContext: React.Context<daum.maps.MarkerClusterer> = React.createContext(
-  {} as daum.maps.MarkerClusterer
+export const MarkerClustererContext: React.Context<kakao.maps.MarkerClusterer> = React.createContext(
+  {} as kakao.maps.MarkerClusterer
 );
 
 export interface MarkerClustererProps {
-  options: daum.maps.MarkerClustererOptions;
+  options: kakao.maps.MarkerClustererOptions;
 }
 
 export class MarkerClusterer extends React.PureComponent<MarkerClustererProps> {
   public static contextType = MapContext;
   public context!: React.ContextType<typeof MapContext>;
 
-  private readonly markerClusterer: daum.maps.MarkerClusterer;
+  private readonly markerClusterer: kakao.maps.MarkerClusterer;
 
   constructor(props: MarkerClustererProps) {
     super(props);
     const { options } = props;
-    this.markerClusterer = new daum.maps.MarkerClusterer(options);
+    this.markerClusterer = new kakao.maps.MarkerClusterer(options);
   }
 
   public componentDidMount() {

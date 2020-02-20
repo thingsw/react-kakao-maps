@@ -3,18 +3,18 @@ import * as React from "react";
 import { MapContext } from "./Map";
 
 export interface RectangleProps {
-  options: daum.maps.RectangleOptions;
+  options: kakao.maps.RectangleOptions;
 }
 
 export class Rectangle extends React.PureComponent<RectangleProps> {
   public static contextType = MapContext;
   public context!: React.ContextType<typeof MapContext>;
 
-  private readonly rectangle: daum.maps.Rectangle;
+  private readonly rectangle: kakao.maps.Rectangle;
 
   constructor(props: RectangleProps) {
     super(props);
-    this.rectangle = new daum.maps.Rectangle(this.props.options);
+    this.rectangle = new kakao.maps.Rectangle(this.props.options);
   }
 
   public componentDidMount() {

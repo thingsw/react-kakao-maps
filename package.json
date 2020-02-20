@@ -6,8 +6,8 @@
   "scripts": {
     "build": "npm run --silent clean && tsc",
     "clean": "rimraf dist",
-    "lint": "eslint --ext js,jsx,ts,tsx src",
-    "prettier": "prettier --write \"src/**/*.{js,ts,tsx,json,css,scss}\""
+    "lint": "eslint --ext ts,tsx src",
+    "prettier": "prettier --write \"src/**/*.{ts,tsx}\""
   },
   "bugs": {
     "url": "https://github.com/crux153/react-kakao-maps/issues"
@@ -42,6 +42,6 @@
     }
   },
   "lint-staged": {
-    "*.{js,ts,tsx,json,css,scss}": "prettier --write"
+    "*.{ts,tsx}": "prettier --write"
   }
 }

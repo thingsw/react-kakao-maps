@@ -4,7 +4,7 @@ import { render } from "react-dom";
 import { MapContext } from "./Map";
 
 export interface CustomOverlayProps {
-  options: daum.maps.CustomOverlayOptions;
+  options: kakao.maps.CustomOverlayOptions;
   visible: boolean;
 }
 
@@ -12,11 +12,11 @@ export class CustomOverlay extends React.PureComponent<CustomOverlayProps> {
   public static contextType = MapContext;
   public context!: React.ContextType<typeof MapContext>;
 
-  private readonly customOverlay: daum.maps.CustomOverlay;
+  private readonly customOverlay: kakao.maps.CustomOverlay;
 
   constructor(props: CustomOverlayProps) {
     super(props);
-    this.customOverlay = new daum.maps.CustomOverlay(this.props.options);
+    this.customOverlay = new kakao.maps.CustomOverlay(this.props.options);
   }
 
   public componentDidMount() {

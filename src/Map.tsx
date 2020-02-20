@@ -1,22 +1,22 @@
 import * as React from "react";
 
-export const MapContext: React.Context<daum.maps.Map> = React.createContext(
-  {} as daum.maps.Map
+export const MapContext: React.Context<kakao.maps.Map> = React.createContext(
+  {} as kakao.maps.Map
 );
 
 export interface MapProps {
   minLevel?: number;
   maxLevel?: number;
-  options: daum.maps.MapOptions;
-  onBoundChanged?(map: daum.maps.Map): void;
-  onCenterChanged?(map: daum.maps.Map): void;
-  onClick?(e: daum.maps.event.MouseEvent, map: daum.maps.Map): void;
-  onLoad?(map: daum.maps.Map): void;
-  onZoomChanged?(map: daum.maps.Map): void;
+  options: kakao.maps.MapOptions;
+  onBoundChanged?(map: kakao.maps.Map): void;
+  onCenterChanged?(map: kakao.maps.Map): void;
+  onClick?(e: kakao.maps.event.MouseEvent, map: kakao.maps.Map): void;
+  onLoad?(map: kakao.maps.Map): void;
+  onZoomChanged?(map: kakao.maps.Map): void;
 }
 
 interface State {
-  map?: daum.maps.Map;
+  map?: kakao.maps.Map;
 }
 
 export class Map extends React.PureComponent<MapProps, State> {
@@ -44,7 +44,7 @@ export class Map extends React.PureComponent<MapProps, State> {
       }
 
       if (prevOptions.mapTypeId !== options.mapTypeId) {
-        map.setMapTypeId(options.mapTypeId || daum.maps.MapTypeId.SKYVIEW);
+        map.setMapTypeId(options.mapTypeId || kakao.maps.MapTypeId.SKYVIEW);
       }
 
       if (prevProps.maxLevel !== this.props.maxLevel) {
@@ -60,18 +60,18 @@ export class Map extends React.PureComponent<MapProps, State> {
   public componentWillUnmount() {
     const { map } = this.state;
     if (map) {
-      daum.maps.event.removeListener(
+      kakao.maps.event.removeListener(
         map,
         MapEvent.bound_changed,
         this._onBoundChanged
       );
-      daum.maps.event.removeListener(
+      kakao.maps.event.removeListener(
         map,
         MapEvent.center_changed,
         this._onCenterChanged
       );
-      daum.maps.event.removeListener(map, MapEvent.click, this._onClick);
-      daum.maps.event.removeListener(
+      kakao.maps.event.removeListener(map, MapEvent.click, this._onClick);
+      kakao.maps.event.removeListener(
         map,
         MapEvent.zoom_changed,
         this._onZoomChanged
@@ -95,9 +95,9 @@ export class Map extends React.PureComponent<MapProps, State> {
 
   private onComponentMount(container: HTMLElement | null) {
     if (container && !this.state.map) {
-      daum.maps.load(() => {
-        daum.maps.disableHD();
-        const map = new daum.maps.Map(container, this.props.options);
+      kakao.maps.load(() => {
+        kakao.maps.disableHD();
+        const map = new kakao.maps.Map(container, this.props.options);
 
         if (this.props.maxLevel) {
           map.setMaxLevel(this.props.maxLevel);
@@ -107,18 +107,18 @@ export class Map extends React.PureComponent<MapProps, State> {
           map.setMinLevel(this.props.minLevel);
         }
 
-        daum.maps.event.addListener(
+        kakao.maps.event.addListener(
           map,
           MapEvent.bound_changed,
           this._onBoundChanged
         );
-        daum.maps.event.addListener(
+        kakao.maps.event.addListener(
           map,
           MapEvent.center_changed,
           this._onCenterChanged
         );
-        daum.maps.event.addListener(map, MapEvent.click, this._onClick);
-        daum.maps.event.addListener(
+        kakao.maps.event.addListener(map, MapEvent.click, this._onClick);
+        kakao.maps.event.addListener(
           map,
           MapEvent.zoom_changed,
           this._onZoomChanged
@@ -148,7 +148,7 @@ export class Map extends React.PureComponent<MapProps, State> {
     }
   }
 
-  private _onClick(e: daum.maps.event.MouseEvent) {
+  private _onClick(e: kakao.maps.event.MouseEvent) {
     const { onClick } = this.props;
     const { map } = this.state;
     if (onClick && map) {
@@ -156,7 +156,7 @@ export class Map extends React.PureComponent<MapProps, State> {
     }
   }
 
-  private _onLoad(map: daum.maps.Map) {
+  private _onLoad(map: kakao.maps.Map) {
     const { onLoad } = this.props;
     if (onLoad) {
       onLoad(map);
