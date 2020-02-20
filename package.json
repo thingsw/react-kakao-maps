@@ -1,5 +1,5 @@
 {
-  "name": "react-kakao-maps",
+  "name": "@ref/react-kakao-maps",
   "version": "0.0.1",
   "description": "React Kakao Map Components",
   "license": "MIT",
@@ -11,12 +11,11 @@
     "watch": "jest --watch"
   },
   "bugs": {
-    "url": "https://github.com/Musma/react-kakao-maps/issues",
-    "email": "hyeonsoo.david.lee@gmail.com"
+    "url": "https://github.com/crux153/react-kakao-maps/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Musma/react-kakao-maps.git"
+    "url": "https://github.com/crux153/react-kakao-maps.git"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -28,7 +27,6 @@
     "@types/jest": "^24.0",
     "@types/react": "^16.8",
     "@types/react-dom": "^16.8",
-    "daum.maps.d.ts": "Musma/daum.maps.d.ts#0.0.1",
     "jest": "^24.8",
     "react-test-renderer": "^16.8",
     "ts-jest": "^24.0",
