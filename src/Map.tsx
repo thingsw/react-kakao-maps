@@ -48,12 +48,18 @@ export class Map extends React.PureComponent<MapProps, State> {
         map.setMapTypeId(options.mapTypeId || kakao.maps.MapTypeId.SKYVIEW);
       }
 
-      if (prevProps.maxLevel !== this.props.maxLevel) {
-        map.setMaxLevel(this.props.maxLevel!);
+      if (
+        typeof this.props.maxLevel !== "undefined" &&
+        prevProps.maxLevel !== this.props.maxLevel
+      ) {
+        map.setMaxLevel(this.props.maxLevel);
       }
 
-      if (prevProps.minLevel !== this.props.minLevel) {
-        map.setMinLevel(this.props.minLevel!);
+      if (
+        typeof this.props.minLevel !== "undefined" &&
+        prevProps.minLevel !== this.props.minLevel
+      ) {
+        map.setMinLevel(this.props.minLevel);
       }
     }
   }

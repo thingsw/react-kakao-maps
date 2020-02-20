@@ -46,14 +46,20 @@ export class CustomOverlay extends React.PureComponent<CustomOverlayProps> {
     const { options: prevOptions } = prevProps;
 
     if (prevOptions !== options) {
-      if (prevOptions.map !== options.map) {
-        this.customOverlay.setMap(options.map!);
+      if (
+        typeof options.map !== "undefined" &&
+        prevOptions.map !== options.map
+      ) {
+        this.customOverlay.setMap(options.map);
       }
       if (prevOptions.position !== options.position) {
         this.customOverlay.setPosition(options.position);
       }
-      if (prevOptions.zIndex !== options.zIndex) {
-        this.customOverlay.setZIndex(options.zIndex!);
+      if (
+        typeof options.zIndex !== "undefined" &&
+        prevOptions.zIndex !== options.zIndex
+      ) {
+        this.customOverlay.setZIndex(options.zIndex);
       }
       this.customOverlay.setVisible(visible);
     }

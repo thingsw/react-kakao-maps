@@ -52,35 +52,62 @@ export class Marker extends React.PureComponent<MarkerProps> {
     const prevOptions = prevProps.options;
 
     if (prevOptions !== options) {
-      if (prevOptions.altitude !== options.altitude) {
-        this.marker.setAltitude(options.altitude!);
+      if (
+        typeof options.altitude !== "undefined" &&
+        prevOptions.altitude !== options.altitude
+      ) {
+        this.marker.setAltitude(options.altitude);
       }
-      if (prevOptions.clickable !== options.clickable) {
-        this.marker.setClickable(options.clickable!);
+      if (
+        typeof options.clickable !== "undefined" &&
+        prevOptions.clickable !== options.clickable
+      ) {
+        this.marker.setClickable(options.clickable);
       }
-      if (prevOptions.draggable !== options.draggable) {
-        this.marker.setDraggable(options.draggable!);
+      if (
+        typeof options.draggable !== "undefined" &&
+        prevOptions.draggable !== options.draggable
+      ) {
+        this.marker.setDraggable(options.draggable);
       }
-      if (prevOptions.image !== options.image) {
-        this.marker.setImage(options.image!);
+      if (
+        typeof options.image !== "undefined" &&
+        prevOptions.image !== options.image
+      ) {
+        this.marker.setImage(options.image);
       }
-      if (prevOptions.map !== options.map) {
-        this.marker.setMap(options.map!);
+      if (
+        typeof options.map !== "undefined" &&
+        prevOptions.map !== options.map
+      ) {
+        this.marker.setMap(options.map);
       }
-      if (prevOptions.opacity !== options.opacity) {
-        this.marker.setOpacity(options.opacity!);
+      if (
+        typeof options.opacity !== "undefined" &&
+        prevOptions.opacity !== options.opacity
+      ) {
+        this.marker.setOpacity(options.opacity);
       }
       if (prevOptions.position !== options.position) {
         this.marker.setPosition(options.position);
       }
-      if (prevOptions.range !== options.range) {
-        this.marker.setRange(options.range!);
+      if (
+        typeof options.range !== "undefined" &&
+        prevOptions.range !== options.range
+      ) {
+        this.marker.setRange(options.range);
       }
-      if (prevOptions.title !== options.title) {
-        this.marker.setTitle(options.title!);
+      if (
+        typeof options.title !== "undefined" &&
+        prevOptions.title !== options.title
+      ) {
+        this.marker.setTitle(options.title);
       }
-      if (prevOptions.zIndex !== options.zIndex) {
-        this.marker.setZIndex(options.zIndex!);
+      if (
+        typeof options.zIndex !== "undefined" &&
+        prevOptions.zIndex !== options.zIndex
+      ) {
+        this.marker.setZIndex(options.zIndex);
       }
     }
   }
