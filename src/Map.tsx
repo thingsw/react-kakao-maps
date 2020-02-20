@@ -9,6 +9,7 @@ export interface MapProps
   minLevel?: number;
   maxLevel?: number;
   options: kakao.maps.MapOptions;
+  zoomable?: boolean;
   onBoundChanged?(map: kakao.maps.Map): void;
   onCenterChanged?(map: kakao.maps.Map): void;
   onClick?(e: kakao.maps.event.MouseEvent, map: kakao.maps.Map): void;
@@ -18,6 +19,13 @@ export interface MapProps
 
 interface State {
   map?: kakao.maps.Map;
+}
+
+enum MapEvent {
+  bound_changed = "bound_changed",
+  center_changed = "center_changed",
+  click = "click",
+  zoom_changed = "zoom_changed"
 }
 
 export class Map extends React.PureComponent<MapProps, State> {
@@ -61,6 +69,13 @@ export class Map extends React.PureComponent<MapProps, State> {
       ) {
         map.setMinLevel(this.props.minLevel);
       }
+
+      if (
+        typeof this.props.zoomable !== "undefined" &&
+        prevProps.zoomable !== this.props.zoomable
+      ) {
+        map.setZoomable(this.props.zoomable);
+      }
     }
   }
 
@@ -94,6 +109,7 @@ export class Map extends React.PureComponent<MapProps, State> {
       minLevel,
       maxLevel,
       options,
+      zoomable,
       onBoundChanged,
       onCenterChanged,
       onClick,
@@ -126,6 +142,10 @@ export class Map extends React.PureComponent<MapProps, State> {
 
         if (this.props.minLevel) {
           map.setMinLevel(this.props.minLevel);
+        }
+
+        if (typeof this.props.zoomable !== "undefined") {
+          map.setZoomable(this.props.zoomable);
         }
 
         kakao.maps.event.addListener(
@@ -191,11 +211,4 @@ export class Map extends React.PureComponent<MapProps, State> {
       onZoomChanged(map);
     }
   }
-}
-
-enum MapEvent {
-  bound_changed = "bound_changed",
-  center_changed = "center_changed",
-  click = "click",
-  zoom_changed = "zoom_changed"
 }
