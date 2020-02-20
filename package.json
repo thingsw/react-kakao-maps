@@ -3,12 +3,11 @@
   "version": "0.0.1",
   "description": "React Kakao Map Components",
   "license": "MIT",
-  "private": true,
   "scripts": {
-    "build": "tsc --build --force",
-    "test": "jest --coverage --errorOnDeprecated --noStackTrace --passWithNoTests",
-    "tslint": "tslint --format codeFrame --project .",
-    "watch": "jest --watch"
+    "build": "npm run --silent clean && tsc",
+    "clean": "rimraf dist",
+    "lint": "eslint --ext js,jsx,ts,tsx src",
+    "prettier": "prettier --write \"src/**/*.{js,ts,tsx,json,css,scss}\""
   },
   "bugs": {
     "url": "https://github.com/crux153/react-kakao-maps/issues"
@@ -20,22 +19,29 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "dependencies": {
-    "react": "^16.8",
-    "react-dom": "^16.8"
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
   },
   "devDependencies": {
-    "@types/jest": "^24.0",
-    "@types/react": "^16.8",
-    "@types/react-dom": "^16.8",
-    "jest": "^24.8",
-    "react-test-renderer": "^16.8",
-    "ts-jest": "^24.0",
-    "tslint": "^5.16",
-    "tslint-config-prettier": "^1.18",
-    "typescript": "^3.4"
+    "@types/react": "^16.9.21",
+    "@types/react-dom": "^16.9.5",
+    "@typescript-eslint/eslint-plugin": "^2.20.0",
+    "@typescript-eslint/parser": "^2.20.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.7",
+    "prettier": "^1.19.1",
+    "react-test-renderer": "^16.12.0",
+    "rimraf": "^3.0.2",
+    "typescript": "^3.7.5"
   },
-  "resolutions": {
-    "@types/react": "^16.8.2",
-    "@types/react-dom": "^16.8.2"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,json,css,scss}": "prettier --write"
   }
 }
