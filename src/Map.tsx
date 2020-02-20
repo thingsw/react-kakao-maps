@@ -4,7 +4,8 @@ export const MapContext: React.Context<kakao.maps.Map> = React.createContext(
   {} as kakao.maps.Map
 );
 
-export interface MapProps {
+export interface MapProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onLoad" | "onClick"> {
   minLevel?: number;
   maxLevel?: number;
   options: kakao.maps.MapOptions;
@@ -82,8 +83,22 @@ export class Map extends React.PureComponent<MapProps, State> {
 
   public render() {
     const { map } = this.state;
+    /* eslint-disable @typescript-eslint/no-unused-vars */
+    const {
+      minLevel,
+      maxLevel,
+      options,
+      onBoundChanged,
+      onCenterChanged,
+      onClick,
+      onLoad,
+      onZoomChanged,
+      ...rest
+    } = this.props;
+    /* eslint-enable @typescript-eslint/no-unused-vars */
+
     return (
-      <div ref={this.onComponentMount} style={{ height: "100%" }}>
+      <div {...rest} ref={this.onComponentMount}>
         {map ? (
           <MapContext.Provider value={map}>
             {this.props.children}
