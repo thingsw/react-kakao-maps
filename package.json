@@ -1,6 +1,6 @@
 {
   "name": "@ref/react-kakao-maps",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "React Kakao Map Components",
   "license": "MIT",
   "scripts": {
@@ -18,6 +18,19 @@
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "react",
+    "reactjs",
+    "typescript",
+    "kakaomap",
+    "daum-map",
+    "daum-map-api",
+    "kakao-maps",
+    "react-components"
+  ],
   "dependencies": {
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
