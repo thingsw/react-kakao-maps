@@ -10,6 +10,7 @@ export interface MapProps
   maxLevel?: number;
   options: kakao.maps.MapOptions;
   zoomable?: boolean;
+  cursor?: string;
   onBoundChanged?(map: kakao.maps.Map): void;
   onCenterChanged?(map: kakao.maps.Map): void;
   onClick?(e: kakao.maps.event.MouseEvent, map: kakao.maps.Map): void;
@@ -75,6 +76,13 @@ export class Map extends React.PureComponent<MapProps, State> {
         prevProps.zoomable !== this.props.zoomable
       ) {
         map.setZoomable(this.props.zoomable);
+      }
+
+      if (
+        typeof this.props.cursor !== "undefined" &&
+        prevProps.cursor !== this.props.cursor
+      ) {
+        map.setCursor(this.props.cursor);
       }
     }
   }
@@ -146,6 +154,10 @@ export class Map extends React.PureComponent<MapProps, State> {
 
         if (typeof this.props.zoomable !== "undefined") {
           map.setZoomable(this.props.zoomable);
+        }
+
+        if (this.props.cursor) {
+          map.setCursor(this.props.cursor);
         }
 
         kakao.maps.event.addListener(
