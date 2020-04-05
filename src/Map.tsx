@@ -5,7 +5,10 @@ export const MapContext: React.Context<kakao.maps.Map> = React.createContext(
 );
 
 export interface MapProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onLoad" | "onClick"> {
+  extends Omit<
+    React.HTMLAttributes<HTMLDivElement>,
+    "onLoad" | "onClick" | "onDragEnd"
+  > {
   minLevel?: number;
   maxLevel?: number;
   options: kakao.maps.MapOptions;
@@ -16,6 +19,7 @@ export interface MapProps
   onClick?(e: kakao.maps.event.MouseEvent, map: kakao.maps.Map): void;
   onLoad?(map: kakao.maps.Map): void;
   onZoomChanged?(map: kakao.maps.Map): void;
+  onDragEnd?(map: kakao.maps.Map): void;
 }
 
 interface State {
@@ -23,10 +27,11 @@ interface State {
 }
 
 enum MapEvent {
-  bound_changed = "bound_changed",
+  bound_changed = "bounds_changed",
   center_changed = "center_changed",
   click = "click",
-  zoom_changed = "zoom_changed"
+  zoom_changed = "zoom_changed",
+  dragend = "dragend"
 }
 
 export class Map extends React.PureComponent<MapProps, State> {
@@ -42,6 +47,7 @@ export class Map extends React.PureComponent<MapProps, State> {
     this._onClick = this._onClick.bind(this);
     this._onLoad = this._onLoad.bind(this);
     this._onZoomChanged = this._onZoomChanged.bind(this);
+    this._onDragEnd = this._onDragEnd.bind(this);
   }
 
   public componentDidUpdate(prevProps: Readonly<MapProps>) {
@@ -106,6 +112,7 @@ export class Map extends React.PureComponent<MapProps, State> {
         MapEvent.zoom_changed,
         this._onZoomChanged
       );
+      kakao.maps.event.removeListener(map, MapEvent.dragend, this._onDragEnd);
     }
     delete this.state.map;
   }
@@ -123,6 +130,7 @@ export class Map extends React.PureComponent<MapProps, State> {
       onClick,
       onLoad,
       onZoomChanged,
+      onDragEnd,
       ...rest
     } = this.props;
     /* eslint-enable @typescript-eslint/no-unused-vars */
@@ -176,6 +184,7 @@ export class Map extends React.PureComponent<MapProps, State> {
           MapEvent.zoom_changed,
           this._onZoomChanged
         );
+        kakao.maps.event.addListener(map, MapEvent.dragend, this._onDragEnd);
 
         this.setState({ map });
 
@@ -221,6 +230,14 @@ export class Map extends React.PureComponent<MapProps, State> {
     const { map } = this.state;
     if (onZoomChanged && map) {
       onZoomChanged(map);
+    }
+  }
+
+  private _onDragEnd() {
+    const { onDragEnd } = this.props;
+    const { map } = this.state;
+    if (onDragEnd && map) {
+      onDragEnd(map);
     }
   }
 }
