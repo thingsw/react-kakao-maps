@@ -4,6 +4,7 @@
   "description": "React Kakao Map Components",
   "license": "MIT",
   "scripts": {
+    "prepare": "npm run build",
     "build": "npm run --silent clean && tsc",
     "clean": "rimraf dist",
     "lint": "eslint --ext ts,tsx src",
